@@ -15,7 +15,6 @@ module.exports = app => {
   const collectDefaultMetrics = client.collectDefaultMetrics
 
   // Probe every 5th second.
-
   collectDefaultMetrics({register,
     timeout: 5000,
     prefix: 'default_'
@@ -99,7 +98,7 @@ module.exports = app => {
       repository_full_name: context.payload.repository.full_name, // repository.full_name
       repository_name: context.payload.repository.name
     }
-    const duration = new Date(context.payload.check_run.completed_at) - new             Date(context.payload.check_run.started_at)
+    const duration = new Date(context.payload.check_run.completed_at) - new Date(context.payload.check_run.started_at)
 
     app.log('observation.action -> ' + observation.action)
     app.log('observation.name -> ' + observation.name)
@@ -112,10 +111,8 @@ module.exports = app => {
     prom.observe(observation, duration)
     app.log('check_run.created -> done')
   })
-
   // For more information on building apps:
   // https://probot.github.io/docs/
-
   // To get your app running against GitHub, see:
   // https://probot.github.io/docs/development/
 }
